@@ -70,20 +70,20 @@
             opacity: 0;
             transition: opacity 1s ease-in-out;
         }
-        .heart, .flower {
-            position: absolute;
-            font-size: 25px;
-            animation: float linear infinite;
-        }
-        @keyframes float {
-            0% { transform: translateY(0) scale(1); opacity: 1; }
-            50% { transform: translateY(-100px) scale(1.2); opacity: 0.7; }
-            100% { transform: translateY(-300px) scale(1); opacity: 0; }
-        }
-        @keyframes fall {
-            0% { transform: translateY(0px); opacity: 1; }
-            100% { transform: translateY(100vh); opacity: 0; }
-        }
+       .heart, .flower {
+    position: fixed; /* Ensure they appear anywhere on the screen */
+    font-size: 25px;
+    animation: float linear infinite;
+    z-index: 9999; /* Ensure they are above everything */
+    pointer-events: none; /* Prevent interaction */
+}
+
+@keyframes float {
+    0% { transform: translateY(0) scale(1); opacity: 1; }
+    50% { transform: translateY(-100px) scale(1.2); opacity: 0.7; }
+    100% { transform: translateY(-300px) scale(1); opacity: 0; }
+}
+
         #gallery img {
             width: 100%;
             max-width: 250px;
@@ -151,30 +151,32 @@
             }
         }
 
-        function spawnHearts() {
-            setInterval(() => {
-                const heart = document.createElement("div");
-                heart.classList.add("heart");
-                heart.innerHTML = "❤️";
-                heart.style.left = Math.random() * window.innerWidth + "px";
-                heart.style.animationDuration = Math.random() * 3 + 2 + "s"; // Random speed
-                document.body.appendChild(heart);
-                setTimeout(() => heart.remove(), 3000);
-            }, 700);
-        }
+       function spawnHearts() {
+    setInterval(() => {
+        const heart = document.createElement("div");
+        heart.classList.add("heart");
+        heart.innerHTML = "❤️";
+        heart.style.left = Math.random() * window.innerWidth + "px";
+        heart.style.top = Math.random() * window.innerHeight + "px"; // Spread across the page
+        heart.style.animationDuration = Math.random() * 3 + 2 + "s"; 
+        document.body.appendChild(heart);
+        setTimeout(() => heart.remove(), 5000);
+    }, 700);
+}
 
-        function spawnFlowers() {
-            setInterval(() => {
-                const flower = document.createElement("div");
-                flower.classList.add("flower");
-                flower.innerHTML = "🌸"; // Flower emoji
-                flower.style.left = Math.random() * window.innerWidth + "px";
-                flower.style.animationDuration = Math.random() * 3 + 2 + "s"; // Random speed
-                document.body.appendChild(flower);
+function spawnFlowers() {
+    setInterval(() => {
+        const flower = document.createElement("div");
+        flower.classList.add("flower");
+        flower.innerHTML = "🌸";
+        flower.style.left = Math.random() * window.innerWidth + "px";
+        flower.style.top = Math.random() * window.innerHeight + "px"; // Spread across the page
+        flower.style.animationDuration = Math.random() * 3 + 2 + "s";
+        document.body.appendChild(flower);
+        setTimeout(() => flower.remove(), 5000);
+    }, 800);
+}
 
-                setTimeout(() => flower.remove(), 5000);
-            }, 800);
-        }
 
         function loadImages() {
             const gallery = document.getElementById("gallery");
