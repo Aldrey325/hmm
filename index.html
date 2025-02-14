@@ -5,6 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Our Special Day</title>
     <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
         body {
             font-family: Arial, sans-serif;
             text-align: center;
@@ -17,40 +22,44 @@
             align-items: center;
             transition: background 2s ease-in-out;
             overflow: hidden;
+            padding: 20px;
         }
         .container {
             background: rgba(255, 255, 255, 0.1);
-            padding: 30px;
+            padding: 20px;
             border-radius: 10px;
+            width: 90%;
+            max-width: 400px;
         }
         .message-box {
             background: rgba(255, 255, 255, 0.2);
-            padding: 20px;
+            padding: 15px;
             border-radius: 10px;
-            max-width: 600px;
+            max-width: 90%;
             text-align: center;
             margin: auto;
             color: white;
-            font-size: 16px;
+            font-size: 14px;
         }
         h2 {
-            font-size: 24px;
+            font-size: 22px;
         }
         p {
             font-size: 14px;
         }
         input {
-            font-size: 28px;
-            padding: 15px;
+            font-size: 20px;
+            padding: 10px;
             text-align: center;
             border-radius: 5px;
             border: none;
-            width: 220px;
+            width: 100%;
+            max-width: 250px;
         }
         button {
             margin-top: 10px;
-            padding: 15px 30px;
-            font-size: 22px;
+            padding: 12px 25px;
+            font-size: 18px;
             background: white;
             color: #2E7D32;
             border: none;
@@ -62,28 +71,25 @@
             opacity: 0;
             transition: opacity 1s ease-in-out;
         }
-        .heart {
+        .heart, .flower {
             position: absolute;
-            color: red;
-            font-size: 50px;
-            animation: float 4s linear infinite;
+            font-size: 25px;
+            animation: float linear infinite;
         }
         @keyframes float {
             0% { transform: translateY(0) scale(1); opacity: 1; }
-            50% { transform: translateY(-200px) scale(1.3); opacity: 0.7; }
-            100% { transform: translateY(-400px) scale(1); opacity: 0; }
-        }
-
-        /* Flower Animation */
-        .flower {
-            position: absolute;
-            top: -50px;
-            font-size: 30px;
-            animation: fall linear infinite;
+            50% { transform: translateY(-100px) scale(1.2); opacity: 0.7; }
+            100% { transform: translateY(-300px) scale(1); opacity: 0; }
         }
         @keyframes fall {
             0% { transform: translateY(0px); opacity: 1; }
             100% { transform: translateY(100vh); opacity: 0; }
+        }
+        #gallery img {
+            width: 100%;
+            max-width: 250px;
+            margin: 10px;
+            border-radius: 10px;
         }
     </style>
 </head>
@@ -100,10 +106,8 @@
         <h2>Happy Valentines Day!</h2>
         <div class="message-box">
             <p>Happy Valentine’s Day, Ely, my love!</p>
-            <p>Babi, Beb, I just want to take this moment to express how deeply I love you. I know that in the past, I have hurt you, and for that, I am truly sorry. It pains me to know that I caused you sadness, and if I could take back those moments, I would. The last thing I ever want is to see you in pain.</p>
-            <p>But, my love, I don’t want us to be trapped in the past. I want us to move forward, to create a new chapter filled with love, understanding, and happiness. Let’s leave behind the things—and the people—that we know only bring us pain. What matters most is us—our love, our future, and the promise of better days ahead.</p>
-            <p>I know I’m not perfect, and I’ve made mistakes. But one thing that will never change is how much I love you. I promise to be better, to love you even more, and to cherish every moment with you. You are my happiness, my heart, and my home.</p>
-            <p>Let’s start fresh, babi. Let’s build a love that’s stronger, unshaken by the past, and filled with the warmth we both deserve. I love you so much.</p>
+            <p>Babi, Beb, I just want to take this moment to express how deeply I love you...</p>
+            <p>Let’s start fresh, babi. Let’s build a love that’s stronger, unshaken by the past...</p>
             <p>Happy Valentine’s Day, my love. ❤️</p>
         </div>
         <audio id="bgMusic" src="music/best.mp3" loop></audio>
@@ -152,9 +156,10 @@
                 heart.classList.add("heart");
                 heart.innerHTML = "❤️";
                 heart.style.left = Math.random() * window.innerWidth + "px";
+                heart.style.animationDuration = Math.random() * 3 + 2 + "s"; // Random speed
                 document.body.appendChild(heart);
-                setTimeout(() => heart.remove(), 4000);
-            }, 500);
+                setTimeout(() => heart.remove(), 3000);
+            }, 700);
         }
 
         function spawnFlowers() {
@@ -167,7 +172,7 @@
                 document.body.appendChild(flower);
 
                 setTimeout(() => flower.remove(), 5000);
-            }, 700);
+            }, 800);
         }
 
         function loadImages() {
@@ -175,9 +180,6 @@
             images.forEach(src => {
                 let img = document.createElement("img");
                 img.src = src;
-                img.style.width = "250px";
-                img.style.margin = "10px";
-                img.style.borderRadius = "10px";
                 gallery.appendChild(img);
             });
         }
